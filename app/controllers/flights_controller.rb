@@ -1,11 +1,18 @@
 class FlightsController < ApplicationController
     def index
-        
-        if params[:flight_choice].nil?
-            @flight_choice = Flight.new()
-        else
+        @airport = Airport.new()
+        @flights = Flight.all
+        if params[:airport].nil?
             @airport_options = Airport.all.map{ |airport| [airport.name, airport.code] }
+        else
+            @airport = Airport.find_by(code: params[:airport][:code])
+            id = @airport.id
+            @flights = Flight.where(departing_airport_id: id)
         end
+    end
+    
+    def show
+        
     end
     
     def flight_params

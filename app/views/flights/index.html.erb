@@ -1,15 +1,14 @@
-<% if @flights.nil? %>
-    <%= render 'flight_form' %>
+<% if params[:airport].nil? %>
+    <%= render 'booking_form' %>
 <% else %>
-    <h1>Flights for  <%= @flights.first.time.to_date %></h1>
+    <h1>Flights!</h1>
     <table>
+        <% @flights.each do |flight| %>
         <tr>
             <th colspan="2">Flight</th>
             <th>Departing</th>
             <th>Arriving</th>
         </tr>
-    <% @flights.each do |flight| %>
-        <tr>
             <td><%= flight.name %></td>
             <td></td>
             <td><%= flight.time.to_s(:time) %></td> 
@@ -17,5 +16,6 @@
         </tr>
     <% end %>
     </table>
-
 <% end %>
+
+ <%= debug(params) if Rails.env.development? %>
