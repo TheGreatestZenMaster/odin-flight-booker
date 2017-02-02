@@ -1,0 +1,8 @@
+<% provide(:title, 'Bookings') %>
+<h1>Your Bookings</h1>
+
+<ul>
+    <% @bookings.each do |booking| %>
+        <li><%= booking.flight.name %></li>
+    <% end %>
+</ul>

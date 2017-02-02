@@ -1,0 +1,10 @@
+<%= form_for @booking do |f| %>
+    Flight: <%= @flight_id %>
+    <%= f.fields_for @booking.passengers.build do |p| %>
+        <% @number_of_passengers.times do %>
+            <%= p.label :name %>
+            <%= p.text_area :name %>
+        <% end %>
+    <% end %>
+    <%= f.submit%>
+<% end %>

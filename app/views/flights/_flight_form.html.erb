@@ -1,0 +1,8 @@
+<%= form_for(@flight, :url => flights_path, :html => { :method => 'GET' }) do |f| %>
+    <%= f.select :departing_airport_id, options_for_select(@airport_options) %>
+    <%= f.select :arriving_airport_id, options_for_select(@airport_options) %>
+    <%= f.fields_for :booking do |p| %> 
+        <%= p.select :num_of_tickets, options_for_select([[1,1], [2,2], [3,3], [4,4]]) %>
+    <% end %>
+    <%= f.submit%>
+<% end %>

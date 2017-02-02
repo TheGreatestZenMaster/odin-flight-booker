@@ -1,23 +1,23 @@
 class FlightsController < ApplicationController
     def index
-        @airport = Airport.new()
-        @flights = Flight.all
-        if params[:airport].nil?
-            @airport_options = Airport.all.map{ |airport| [airport.name, airport.code] }
+        @flight = Flight.new()
+        if params[:flight].nil?
+            @airport_options = Airport.all.collect { |airport| [airport.name, airport.id] }
         else
-            @airport = Airport.find_by(code: params[:airport][:code])
-            id = @airport.id
-            @flights = Flight.where(departing_airport_id: id)
+            @number_of_passengers = params[:flight][:booking][:num_of_tickets]
+            @booking = Booking.new()
+            @flights = Flight.where(departing_airport_id: params[:flight][:departing_airport_id], 
+                                        arriving_airport_id: params[:flight][:arriving_airport_id])
+            @flight_options = @flights.map { |flight| [flight.time.to_s(:time), flight.id] }
         end
     end
     
     def show
-        
+        @flight = Flight.find(params[:id])
     end
     
-    def flight_params
-        unless params[:flight_choice].nil?
-            params.require(:flight_choice).permit() 
+    private
+        def flight_params
+           params.require(:flight).permit(:flight => [:departing_airport_id, :arriving_airport_id]) 
         end
-    end
 end

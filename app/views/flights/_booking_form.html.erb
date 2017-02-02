@@ -1,5 +1,5 @@
-<%= form_for(@airport, :url => flights_path, :html => { :method => 'GET' }) do |f| %>
-    <%= f.select(:code, @airport_options) %>
-    <%= f.select(:code, @airport_options) %>
+<%= form_for(@booking, :url => bookings_path, :html => { :method => 'GET' }) do |f| %>
+    <%= f.select :flight_id, @flight_options %>
+    <%= f.hidden_field :passengers, value: @number_of_passengers %>
     <%= f.submit%>
 <% end %>
