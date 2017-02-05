@@ -1,3 +1,7 @@
-Flight: <%= @booking.flight.name %><br>
-Leaving: <%= @booking.flight.departing_airport.name %>
-Passengers: <%= @number_of_passengers %>
+<%= form_for @booking do |f| %>
+    <%= f.hidden_field :flight_id, value: @flight_id %>
+    <%= f.fields_for :passengers do |p| %>
+        Name: <%= p.text_field :name %>
+    <% end %>
+    <%= f.submit %>
+<% end %>

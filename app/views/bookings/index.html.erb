@@ -1,10 +1,9 @@
-<%= form_for @booking do |f| %>
-    Flight: <%= @flight_id %>
-    <%= f.fields_for @booking.passengers.build do |p| %>
-        <% @number_of_passengers.times do %>
-            <%= p.label :name %>
-            <%= p.text_area :name %>
-        <% end %>
-    <% end %>
-    <%= f.submit%>
+Passengers: <% @passengers.each do |passenger| %><br>
+    <%= passenger.name %><br>
 <% end %>
+<%= form_for(@booking, :url => booking_path(@booking.id), :html => { :method => "get"}) do |f| %>
+    Flight: <%= @flight_id %>
+    <%= f.hidden_field :booking_id, value: @booking.id %>
+    <%= f.submit "Confirm" %>
+<% end %>
+ID: <%= @booking.id %>

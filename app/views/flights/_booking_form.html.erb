@@ -1,5 +1,21 @@
-<%= form_for(@booking, :url => bookings_path, :html => { :method => 'GET' }) do |f| %>
-    <%= f.select :flight_id, @flight_options %>
-    <%= f.hidden_field :passengers, value: @number_of_passengers %>
+<%= form_for(@booking, :url => new_booking_path, :html => { :method => 'GET' }) do |f| %>
+    <%= f.hidden_field :number_of_passengers, value: @number_of_passengers %>
+    <table>
+        <th></th>
+        <th>Departing Time</th>
+        <th>Departing Airport</th>
+        <th>Flight Time</th>
+        <%= collection_radio_buttons(:flight, :id, @flight_options, :id, :event_date_text) do |b| %>
+            <tr>
+                <td><%= b.radio_button %></td>
+                <td><%= b.object.event_date_text %></td>
+                <td><%= b.object.departing_airport.code %></td>
+                <td><%= Time.at(b.object.duration).utc.strftime("%H:%M:%S") %></td>
+            </tr>
+        <% end %>
+    </table>
     <%= f.submit%>
 <% end %>
+
+
+

@@ -4,5 +4,6 @@
     <%= f.fields_for :booking do |p| %> 
         <%= p.select :num_of_tickets, options_for_select([[1,1], [2,2], [3,3], [4,4]]) %>
     <% end %>
+    <%= f.select :time, options_for_select(@time_options) %>
     <%= f.submit%>
 <% end %>

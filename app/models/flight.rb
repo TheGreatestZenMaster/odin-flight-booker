@@ -4,4 +4,8 @@ class Flight < ApplicationRecord
   has_many :bookings, foreign_key: :flight_id
   has_many :passengers, through: :bookings
   accepts_nested_attributes_for :bookings
+  
+  def event_date_text
+      time.strftime("%d/%m/%Y")
+  end
 end

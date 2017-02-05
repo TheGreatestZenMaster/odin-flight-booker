@@ -1,6 +1,5 @@
-<% if params[:flight].nil? %>
-    <%= render 'flight_form' %>
-<% else %>
+<%= render 'flight_form' %>
+<% unless params[:flight].nil? %>
     <h1>Flights!</h1>
     <%= render 'booking_form' %>
     </table>

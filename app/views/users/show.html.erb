@@ -3,6 +3,6 @@
 
 <ul>
     <% @bookings.each do |booking| %>
-        <li><%= booking.flight.name %></li>
+        <li><%= link_to "#{booking.flight.name}", booking_path(booking.id) %></li>
     <% end %>
 </ul>
