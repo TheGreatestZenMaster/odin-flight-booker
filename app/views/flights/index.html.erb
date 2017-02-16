@@ -1,6 +1,6 @@
 <%= render 'flight_form' %>
 <% unless params[:flight].nil? %>
     <h1>Flights!</h1>
-    <%= render 'booking_form' %>
+    <%= render 'booking_form' if @flights.any? %>
     </table>
 <% end %>

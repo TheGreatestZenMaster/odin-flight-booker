@@ -3,13 +3,11 @@
     <table>
         <th></th>
         <th>Departing Time</th>
-        <th>Departing Airport</th>
         <th>Flight Time</th>
         <%= collection_radio_buttons(:flight, :id, @flight_options, :id, :event_date_text) do |b| %>
             <tr>
                 <td><%= b.radio_button %></td>
                 <td><%= b.object.event_date_text %></td>
-                <td><%= b.object.departing_airport.code %></td>
                 <td><%= Time.at(b.object.duration).utc.strftime("%H:%M:%S") %></td>
             </tr>
         <% end %>
