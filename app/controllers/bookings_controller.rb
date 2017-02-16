@@ -1,4 +1,5 @@
 class BookingsController < ApplicationController
+    before_action :user_logged_in?, only: [:create]
     
     def new
         @flight_id = params[:flight][:id]
@@ -15,7 +16,7 @@ class BookingsController < ApplicationController
     
     def create
         @flight_id = params[:booking][:flight_id]
-        @booking = Booking.create!(flight_id: @flight_id, user_id: 1)
+        @booking = Booking.create!(flight_id: @flight_id, user_id: session[:user_id])
         params[:booking][:passengers_attributes].each do |key, hash|
            @booking.passengers.create!(name: params[:booking][:passengers_attributes][key][:name])
         end
@@ -27,6 +28,13 @@ class BookingsController < ApplicationController
     
         def passenger_params
             params.require(:booking).permit(:name)
+        end
+        
+        def user_logged_in?
+            if session[:user_id].nil?
+                flash[:danger] = "Please log in before booking a flight!"
+                redirect_to login_path
+            end
         end
 
 end
