@@ -1,7 +1,13 @@
-<%= form_for @booking do |f| %>
+<%= form_for(@booking, :html => {:id => "passenger_form"}) do |f| %>
     <%= f.hidden_field :flight_id, value: @flight_id %>
+    
     <%= f.fields_for :passengers do |p| %>
-        Name: <%= p.text_field :name %>
+        <% if p.index == 0 %>
+            Name: <%= p.text_field :name, value: "#{@user.name}" %>
+        <% else %>
+            Name: <%= p.text_field :name %>
+        <% end %>
     <% end %>
+    <br>
     <%= f.submit %>
 <% end %>

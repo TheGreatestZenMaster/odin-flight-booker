@@ -1,5 +1,6 @@
 <%= form_for(@booking, :url => new_booking_path, :html => { :method => 'GET' }) do |f| %>
     <%= f.hidden_field :number_of_passengers, value: @number_of_passengers %>
+    <div class="booking_table">
     <table>
         <th></th>
         <th>Departing Time</th>
@@ -13,6 +14,7 @@
         <% end %>
     </table>
     <%= f.submit%>
+    </div>
 <% end %>
 
 

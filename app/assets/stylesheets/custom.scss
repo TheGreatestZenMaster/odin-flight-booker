@@ -309,6 +309,51 @@ td {
     border: solid black 2px;
     background-color: transparent;
   }
-
 }
 
+
+
+.new_booking {
+  .booking_table{
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    table {
+      width: 30%;
+      margin: 0 auto;
+      th, tr {
+        text-align: center;
+      }
+      td {
+        width: 40%;
+      }
+      td:first-child {
+        width: 25%;
+      }
+    }
+    input[type=submit] {
+      text-align: center;
+      width: 30%;
+      height: 100%;
+      border: solid black 2px;
+      background-color: transparent;
+    }
+  }
+}
+
+#passenger_form {
+  display: block;
+  input[type=text] {
+    display: inline;
+    width: 20%;
+    text-align: center;
+    background-color: white;
+  }
+  input[type=submit] {
+    text-align: center;
+    width: 25%;
+    height: 100%;
+    border: solid black 2px;
+    background-color: transparent;
+  }
+}

@@ -2,6 +2,7 @@ class BookingsController < ApplicationController
     before_action :user_logged_in?, only: [:new]
     
     def new
+        @user = current_user
         @flight_id = params[:flight][:id]
         @booking = Booking.new
         @number_of_passengers = params[:booking][:number_of_passengers].to_i
@@ -15,11 +16,13 @@ class BookingsController < ApplicationController
     end
     
     def create
+        @user = current_user
         @flight_id = params[:booking][:flight_id]
         @booking = Booking.create!(flight_id: @flight_id, user_id: session[:user_id])
         params[:booking][:passengers_attributes].each do |key, hash|
            @booking.passengers.create!(name: params[:booking][:passengers_attributes][key][:name])
         end
+        UserMailer.flight_confirmation_email(@user).deliver_now
         redirect_to booking_path(@booking.id)
     end
     
