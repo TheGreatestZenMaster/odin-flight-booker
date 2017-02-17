@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-    before_action :user_logged_in?, only: [:create]
+    before_action :user_logged_in?, only: [:new]
     
     def new
         @flight_id = params[:flight][:id]
@@ -31,9 +31,10 @@ class BookingsController < ApplicationController
         end
         
         def user_logged_in?
-            if session[:user_id].nil?
-                flash[:danger] = "Please log in before booking a flight!"
-                redirect_to login_path
+            unless logged_in?
+                store_location
+                flash[:danger] = "Please log in."
+                redirect_to login_url
             end
         end
 
